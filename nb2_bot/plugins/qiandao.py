@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 driver = get_driver()
 BOT_ID = str(driver.config.bot_id)
-user_config = driver.config.user_config
+user_config = [driver.config.user_config1,driver.config.user_config2,driver.config.user_config3]
 
 # @on_command('qiandaoforjia', aliases=('DNF论坛签到'), only_to_me = False, permission = permission.SUPERUSER)
 async def qiandaoforjia(user_id, user_cookie):
@@ -60,4 +60,4 @@ async def gogogo(user_id, user_cookie):
 
     return f"{user_id} {c} 经验值{jingyan} 代币券{daibi}"
 
-[scheduler.add_job(qiandaoforjia, 'cron', hour=i[0], minute=i[1],args = [i[2]['user_id'], i[2]['user_cookie']]) for i in user_config]
+[scheduler.add_job(qiandaoforjia, 'cron', hour=i[0], minute=i[1],args = [i[2], i[3]]) for i in user_config]
