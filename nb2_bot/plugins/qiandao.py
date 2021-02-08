@@ -11,8 +11,6 @@ driver = get_driver()
 BOT_ID = str(driver.config.bot_id)
 user_config = driver.config.user_config
 
-1
-
 # @on_command('qiandaoforjia', aliases=('DNF论坛签到'), only_to_me = False, permission = permission.SUPERUSER)
 async def qiandaoforjia(user_id, user_cookie):
     bot = driver.bots[BOT_ID]
