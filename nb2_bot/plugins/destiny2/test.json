@@ -1,0 +1,69 @@
+{
+  "displayProperties": {
+    "description": "传承的锁链必须被打破。",
+    "name": "深岩墓室",
+    "icon": "/common/destiny2_content/icons/8b1bfd1c1ce1cab51d23c78235a6e067.png",
+    "hasIcon": true
+  },
+  "originalDisplayProperties": {
+    "description": "传承的锁链必须被打破。",
+    "name": "深岩墓室",
+    "icon": "/img/misc/missing_icon_d2.png",
+    "hasIcon": false
+  },
+  "releaseIcon": "/img/misc/missing_icon_d2.png",
+  "releaseTime": 0,
+  "activityLevel": 50,
+  "completionUnlockHash": 0,
+  "activityLightLevel": 0,
+  "destinationHash": 1729879943,
+  "placeHash": 1729879943,
+  "activityTypeHash": 2043403989,
+  "tier": 0,
+  "pgcrImage": "/img/destiny_content/pgcr/europa-raid-deep-stone-crypt.jpg",
+  "rewards": [
+    {
+      "rewardItems": [
+        {
+          "itemHash": 2558665671,
+          "quantity": 0
+        }
+      ]
+    },
+    {
+      "rewardItems": [
+        {
+          "itemHash": 2127149322,
+          "quantity": 0
+        }
+      ]
+    }
+  ],
+  "modifiers": [],
+  "isPlaylist": false,
+  "challenges": [],
+  "optionalUnlockStrings": [],
+  "inheritFromFreeRoam": false,
+  "suppressOtherRewards": false,
+  "playlistItems": [],
+  "matchmaking": {
+    "isMatchmade": true,
+    "minParty": 1,
+    "maxParty": 6,
+    "maxPlayers": 6,
+    "requiresGuardianOath": true
+  },
+  "guidedGame": {
+    "guidedMaxLobbySize": 5,
+    "guidedMinLobbySize": 2,
+    "guidedDisbandCount": 0
+  },
+  "loadouts": [],
+  "isPvP": false,
+  "insertionPoints": [],
+  "activityLocationMappings": [],
+  "hash": 3976949817,
+  "index": 113,
+  "redacted": false,
+  "blacklisted": false
+}
