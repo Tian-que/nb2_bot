@@ -61,3 +61,12 @@ async def gogogo(user_id, user_cookie):
     return f"{user_id} {c} 经验值{jingyan} 代币券{daibi}"
 
 [scheduler.add_job(qiandaoforjia, 'cron', hour=i[0], minute=i[1],args = [i[2], i[3]]) for i in user_config]
+
+async def flash_d2api():
+    url = 'http://www.tianque.top/d2api/today/'
+    async with aiohttp.ClientSession() as session:
+        response = await session.get(url=url)
+        content = await response.read()
+        print(content)
+
+scheduler.add_job(flash_d2api, 'cron', hour=1, minute=1)
