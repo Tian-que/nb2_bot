@@ -201,7 +201,7 @@ async def get_perks(name):
     # icon_up_src = icon[0]['src']
 
     sign_icon = {
-        'figname': '.'.join([icon[0]['class'][0], icon[0]['src'].split('.')[-1]]),
+        'figname': icon[0]['src'].split('/')[-1],
         'figurl': icon[0]['src'],
         'figdir': os.path.join(os.getcwd(), 'nb2_bot', 'data', 'destiny2', 'image','signs')
     }
