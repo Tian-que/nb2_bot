@@ -50,6 +50,6 @@ async def pohai_m():
     fig_dir = os.path.join(os.getcwd(), 'nb2_bot', 'data', 'pohai', '699721296') + '\\' + random.choice(img)
     ret = '[CQ:image,file=file:///' + fig_dir + ']'
     bot = driver.bots[BOT_ID]
-    await bot.send_group_msg(group_id=699721296, message=Message('早上好(冰心除外)\n' + ret))
+    await bot.send_group_msg(group_id=978717771, message=Message('早上好(冰心除外)\n' + ret))
 
 scheduler.add_job(pohai_m, 'cron',hour=6,minute=0)
