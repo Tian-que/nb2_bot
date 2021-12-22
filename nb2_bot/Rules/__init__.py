@@ -15,3 +15,11 @@ def check_setu_bans() -> Rule:
             return True
         return False
     return Rule(_checker)
+
+def only_cmdhead() -> Rule:
+    async def _checker(bot: Bot, event: Event, state: T_State) -> bool:
+        if event.get_message():
+            return False
+        else:
+            return True
+    return Rule(_checker)

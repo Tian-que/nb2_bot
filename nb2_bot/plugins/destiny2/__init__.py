@@ -3,15 +3,14 @@ from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
 from nonebot.adapters.cqhttp.message import Message
 from .weekly_report import *
+from .today_report import *
 from .data_source import *
+from .update_today_report_to_heybox import *
 from nb2_bot.utils import download_file
 
 BOT_ID = str(driver.config.bot_id)
 
-
 weekly_report = on_command("weekly_report", aliases={'周报', '老九', '试炼', }, priority=5)
-Vendor_Sales = on_command("Vendor_Sales", aliases={'枪酱', }, priority=5)
-Get_access_token = on_command("Get_access_token", aliases={'凭证', }, priority=5, permission=permission.SUPERUSER)
 get_perk = on_endswith("perk",priority=5)
 
 @get_perk.handle()
@@ -50,44 +49,3 @@ async def _(bot: Bot, event: Event, state: T_State):
             return
     await weekly_report.send(Message(f"[CQ:image,file=file:///{fig_dir}]"))
 
-@Vendor_Sales.handle()
-async def _(bot: Bot, event: Event, state: T_State):
-    names = await Get_Vendor_Sales()
-
-    fig_dir = os.path.join(os.getcwd(), 'nb2_bot', 'data', 'destiny2', 'image', 'everyday_mod',
-                           names[0][1] + '_' + names[1][1] + '.png')
-
-    if not os.path.exists(fig_dir):
-        for name in names:
-            figName = name[0].replace('/', '_')
-            mod_dir = os.path.join(os.getcwd(), 'nb2_bot', 'data', 'destiny2', 'image', 'mod', figName)
-            fig_url = 'https://www.bungie.net/' + name[0]
-            if not os.path.exists(mod_dir):
-                if not await download_file(url=fig_url,filename=mod_dir):
-                    await Vendor_Sales.send('失败了')
-                    return
-        await info_to_img(names)
-
-    # name:: [icon,name]
-    await Vendor_Sales.send(Message('[CQ:image,file=file:///' + fig_dir + ']'))
-
-    async def download_img(names):
-        for name in names:
-
-
-
-            fig_dir = os.path.join(os.getcwd(), 'nb2_bot', 'data', 'destiny2', 'image', 'mod', figName)
-            if not os.path.exists(fig_dir):
-                async with aiohttp.ClientSession() as session:
-                    response = await session.get('https://www.bungie.net/' + name[0], verify_ssl=False)
-                    content = await response.read()
-
-                with open(fig_dir, 'wb') as f:
-                    f.write(content)
-        return 1
-
-@Get_access_token.handle()
-async def Get_access_token(bot: Bot, event: Event, state: T_State):
-    ret = await Refresh_Token()
-    await Get_access_token.send(ret)
-    pass

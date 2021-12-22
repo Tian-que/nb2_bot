@@ -12,7 +12,7 @@ BOT_ID = str(driver.config.bot_id)
 
 def check_recall() -> Rule:
     async def _checker(bot: Bot, event: Event, state: T_State) -> bool:
-        if event.get_event_name() == 'notice.group_recall':
+        if event.get_event_name() == 'notice.group_recall' and event.get_user_id()!= BOT_ID:
             return True
         return False
     return Rule(_checker)

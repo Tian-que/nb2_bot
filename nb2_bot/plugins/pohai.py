@@ -27,11 +27,11 @@ async def _(bot: Bot, event: GroupMessageEvent, state: T_State):
         fig_dir = os.path.join(os.getcwd(), 'nb2_bot', 'data', 'pohai', str(event.group_id)) + '\\' + random.choice(img)
         ret = '[CQ:image,file=file:///' + fig_dir + ']'
         await pohai.send(message=Message(ret))
-    except:
+    except Exception as e:
         await pohai.send(message='当前群没有迫害名单')
 
 
-pohai_add = on_command("pohai_add", rule=check_group_message(),  aliases={'添加迫害', }, priority=5, permission = GROUP_OWNER | GROUP_ADMIN)
+pohai_add = on_command("pohai_add", rule=check_group_message(),  aliases={'添加迫害', }, priority=5, permission = GROUP_OWNER | GROUP_ADMIN | permission.SUPERUSER)
 
 @pohai_add.handle()
 async def _(bot: Bot, event: GroupMessageEvent, state: T_State):

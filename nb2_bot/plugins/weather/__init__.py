@@ -4,12 +4,25 @@ from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
 from jieba import posseg
 from .data_source import get_weather_of_city
+from nonebot.rule import Rule
+
+def check_weather_ban_group_id() -> Rule:
+    async def _checker(bot: Bot, event: Event, state: T_State) -> bool:
+        try:
+            if event.group_id in [287952660]:
+                return False
+            else:
+                return True
+        except:
+            return True
+
+    return Rule(_checker)
 
 __plugin_name__ = '查询天气'
 __plugin_usage__ = '发送 [天气] [今天天气怎么样？] [北京天气] 来查询天气'
 
 
-weather = on_keyword(keywords={'天气', '天气预报', '查天气', }, priority=5)
+weather = on_keyword(keywords={'天气', '天气预报', '查天气', }, rule=check_weather_ban_group_id() , priority=5)
 
 
 @weather.handle()

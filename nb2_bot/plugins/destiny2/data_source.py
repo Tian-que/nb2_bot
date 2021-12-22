@@ -226,7 +226,7 @@ async def get_perks(name):
         await download_img2(**sign_icon)
         await download_img2(**weapon_icon)
 
-        img = Image.new('RGB', (760, 150), (26, 26, 32))
+        img = Image.new('RGBA', (760, 150))
         drawobj = ImageDraw.Draw(img)
         # font = ImageFont.truetype('msyhbd.ttc', 35)
 
@@ -415,22 +415,22 @@ async def get_perks(name):
 
     async def make_p5():
         if R_ROLL == []:
-            img = Image.new('RGB', (760, 1), (26, 26, 32))
+            img = Image.new('RGBA', (760, 1))
             return img
         high = max([len([j for j in i if j['cls'] != 'retired']) for i in R_ROLL])
-        img = Image.new('RGB', (760, 120 + 60*(high-1)), (26, 26, 32))
+        img = Image.new('RGBA', (760, 120 + 66*(high-1)))
         # img = Image.open('D:\PYTHON\complex-bot\data\destiny2\image\material\p5_base.png')
         drawobj = ImageDraw.Draw(img)
 
         font = ImageFont.truetype('msyhbd.ttc', 25)
-        drawobj.text([30, 15], 'ROLLS', (170, 170, 170), font=font)
+        # drawobj.text([30, 15], 'ROLLS', (170, 170, 170), font=font)
         roll_dir = os.path.join(os.getcwd(), 'nb2_bot', 'data', 'destiny2', 'image', 'perks')
 
         j = 0
         x = 34
         x_j = 85
         y = 60
-        y_j = 60
+        y_j = 66
         pref = {
             'pref': '\\p-icon.png',
             'prefpvp': '\\pvp-icon.png',
