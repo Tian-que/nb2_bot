@@ -14,5 +14,6 @@ nb2_bot/data
 nb2_bot/plugins/banshui.py
 nb2_bot/plugins/hy_check.py
 nb2_bot/plugins/tyf/
+nb2_bot/utils/Heybox.py
 
 *.pyc
