@@ -8,7 +8,7 @@ from nonebot.adapters.cqhttp.message import Message
 from nonebot.adapters.cqhttp import utils
 from nonebot.rule import Rule
 import aiohttp
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 import asyncio
 
 import time
@@ -108,19 +108,3 @@ async def json_escape(str):
     str = str.replace("]", "&#93;")
     print(str)
     return str
-
-# def check_recall() -> Rule:
-#     async def _checker(bot: Bot, event: Event, state: T_State) -> bool:
-#         if event.get_event_name() == 'notice.group_recall':
-#             return True
-#         return False
-#     return Rule(_checker)
-# rule=check_recall()
-
-
-# anti_recall = on_message()
-#
-# @anti_recall.handle()
-# async def _(bot: Bot, event: GroupMessageEvent):
-#     d = 1
-#     pass
