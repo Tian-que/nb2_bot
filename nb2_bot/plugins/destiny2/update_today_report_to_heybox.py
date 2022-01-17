@@ -61,7 +61,7 @@ async def recreat_article():
         today_data = await response.json()
     if today_data.get('error'):
         raise
-    tittle = f'命运2日报 {today_data["season_date_info"]["today"]}'
+    tittle = f'《命运2》 日报 - {today_data["season_date_info"]["today"]}'
     points = []
     points.append(f"1320遗失掉落{today_data['Lost']['1320']['掉落部位']}，1350遗失掉落{today_data['Lost']['1350']['掉落部位']}")
     mod = []
@@ -117,7 +117,7 @@ async def creat_article():
         today_data = await response.json()
     if today_data.get('error'):
         raise
-    tittle = f'命运2日报 {today_data["season_date_info"]["today"]}'
+    tittle = f'《命运2》 日报 - {today_data["season_date_info"]["today"]}'
     points = []
 
     points.append(f"1320遗失掉落{today_data['Lost']['1320']['掉落部位']}，1350遗失掉落{today_data['Lost']['1350']['掉落部位']}")
@@ -150,8 +150,6 @@ async def creat_article():
             f"标题: {tittle}\n" \
             f"URL: https://www.xiaoheihe.cn/community/65410/list/{link_id}"
 
-
-
 @today_report_edit.handle()
 async def _(bot: Bot, event: Event, state: T_State):
     url = 'http://www.tianque.top/d2api/today/'
@@ -163,7 +161,8 @@ async def _(bot: Bot, event: Event, state: T_State):
     cache = await readTo(fig_dir)
     today = img_data['today']
     if cache == 0 or today != cache.get('today'):
-        return "今天还未发日报，请输入 日报自动发帖 以发送日报"
+        ret = "今天还未发日报，请输入 日报自动发帖 以发送日报"
+        await today_report_edit.finish(Message(ret))
 
     state['tittle'] = cache['tittle']
     state['link_id'] = cache['link_id']
@@ -175,8 +174,6 @@ async def _(bot: Bot, event: Event, state: T_State):
     args = str(event.get_message()).strip()
     if args:
         state['new_points'] = args.split()
-
-
 
 @today_report_edit.got("new_points", prompt="标题: {tittle}\nURL: {url}\n当前要点: \n{points}\n\n请输入修改后要点")
 async def _(bot: Bot, event: Event, state: T_State):
@@ -212,7 +209,7 @@ async def _(bot: Bot, event: Event, state: T_State):
         await today_report_edit.finish('参数错误，请重新调用命令', at_sender=True)
 
 async def build_text(points, img_url, img_height):
-    return [{"type":"html","text":f"<h2><b>今日的命运2:</b></h2><ul>{''.join([f'<li><b>{i}</b></li>' for i in points])}</ul><p><img class=\"lazy\" data-width=\"1063\" data-height=\"{img_height}\" data-original=\"{img_url}\"></p><p>&nbsp;<a href=\"heybox://open_subject\" target=\"_blank\">#命运2日报#</a>  </p>"},{"type":"img","url":img_url,"width":"1063","height":str(img_height)}]
+    return [{"type":"html","text":f"<h2><b>今日的命运2:</b></h2><ul>{''.join([f'<li><b>{i}</b></li>' for i in points])}</ul><p><img class=\"lazy\" data-width=\"1063\" data-height=\"{img_height}\" data-original=\"{img_url}\"></p><p>日报于每日 1:03 自动投稿，如命运2更新日等情况会在API维护结束后投稿。</p><p>同时欢迎各位来对日报提建议：<a href=\"https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=76390615\" target=\"_blank\">日报反馈贴</a></p><p><br></p><p>版权声明:</p><blockquote><p>版权声明</p><p>在本网站发表的文章(包括转帖)，版权归原作者所有</p><p>在征得作者同意的情况下，日报允许非盈利性引用，并请注明出处：“作者：kamuxiy、wenmumu、天阙”字样，以尊重作者的劳动成果</p><p>本网站的所有作品会由作者及时更新，欢迎大家阅读后发表评论，以利作品的完善</p></blockquote><p><br></p><p>&nbsp;<a href=\"heybox://open_subject\" target=\"_blank\">#命运2日报#</a>  </p>"},{"type":"img","url":img_url,"width":"1063","height":str(img_height)}]
 
 
 async def auto_post():
